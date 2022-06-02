@@ -779,9 +779,6 @@ function build_libjudy {
 	fi
 
 	echo -n " checking..."
-	# ./bootstrap file to replace automake-1.9 with automake.
-	sed -i -e 's/automake-1.9/automake/' ./bootstrap >> "$DIR/install.log" 2>&1
-	./bootstrap >> "$DIR/install.log" 2>&1
 	RANLIB=$RANLIB ./configure --prefix="$INSTALL_DIR" \
 		$EXTRA_FLAGS >> "$DIR/install.log" 2>&1
 	echo -n " compiling..."
