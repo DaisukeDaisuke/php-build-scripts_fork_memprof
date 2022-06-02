@@ -844,6 +844,8 @@ get_github_extension "morton" "$EXT_MORTON_VERSION" "pmmp" "ext-morton"
 
 get_github_extension "xxhash" "$EXT_XXHASH_VERSION" "pmmp" "ext-xxhash"
 
+get_pecl_extension "memprof" "3.0.2"
+
 echo -n "[PHP]"
 
 if [ "$DO_OPTIMIZE" != "no" ]; then
