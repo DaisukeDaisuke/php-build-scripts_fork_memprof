@@ -27,6 +27,8 @@ EXT_LIBDEFLATE_VERSION="0.1.0"
 EXT_MORTON_VERSION="0.1.2"
 EXT_XXHASH_VERSION="0.1.1"
 
+apt-get -y install libjudy-dev
+
 function write_out {
 	echo "[$1] $2"
 }
