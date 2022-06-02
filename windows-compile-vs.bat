@@ -201,6 +201,7 @@ call :get-extension-zip-from-github "recursionguard"        "%PHP_RECURSIONGUARD
 call :get-extension-zip-from-github "morton"                "%PHP_MORTON_VER%"                "pmmp"     "ext-morton"              || exit 1
 call :get-extension-zip-from-github "libdeflate"            "%PHP_LIBDEFLATE_VER%"            "pmmp"     "ext-libdeflate"          || exit 1
 call :get-extension-zip-from-github "xxhash"                "%PHP_XXHASH_VER%"                "pmmp"     "ext-xxhash"              || exit 1
+call :get-extension-zip-from-github "memprof"                "3.0.2"                        "arnaud-lb"   "php-memory-profiler"  || exit 1
 
 call :pm-echo " - crypto: downloading %PHP_CRYPTO_VER%..."
 git clone https://github.com/bukka/php-crypto.git crypto >>"%log_file%" 2>&1 || exit 1
@@ -231,6 +232,7 @@ call configure^
  --enable-bcmath^
  --enable-calendar^
  --enable-chunkutils2=shared^
+ --enable-memprof^
  --enable-com-dotnet^
  --enable-ctype^
  --enable-fileinfo=shared^
