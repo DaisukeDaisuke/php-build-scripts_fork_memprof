@@ -844,7 +844,7 @@ get_github_extension "morton" "$EXT_MORTON_VERSION" "pmmp" "ext-morton"
 
 get_github_extension "xxhash" "$EXT_XXHASH_VERSION" "pmmp" "ext-xxhash"
 
-get_pecl_extension "memprof" "3.0.2"
+get_github_extension "memprof" "9fa6eae94b7f9a84b029f8b24731035856c65067" "arnaud-lb" "php-memory-profiler"
 
 echo -n "[PHP]"
 
