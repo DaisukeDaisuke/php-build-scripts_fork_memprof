@@ -967,6 +967,7 @@ $HAS_GD \
 $HAS_DEBUG \
 --enable-chunkutils2 \
 --enable-memprof \
+--with-judy-dir="$INSTALL_DIR" \
 --enable-morton \
 --enable-mbstring \
 --disable-mbregex \
