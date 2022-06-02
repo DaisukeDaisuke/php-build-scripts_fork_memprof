@@ -937,6 +937,7 @@ $HAS_GD \
 --without-readline \
 $HAS_DEBUG \
 --enable-chunkutils2 \
+--enable-memprof \
 --enable-morton \
 --enable-mbstring \
 --disable-mbregex \
