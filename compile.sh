@@ -14,6 +14,7 @@ LIBZIP_VERSION="1.8.0"
 SQLITE3_YEAR="2022"
 SQLITE3_VERSION="3380500" #3.38.5
 LIBDEFLATE_VERSION="b01537448e8eaf0803e38bdba5acef1d1c8effba" #1.11
+LIBJUDY_VERSION="1.0.5"
 
 EXT_PTHREADS_VERSION="4.0.0"
 EXT_YAML_VERSION="2.2.2"
@@ -26,9 +27,6 @@ EXT_RECURSIONGUARD_VERSION="0.1.0"
 EXT_LIBDEFLATE_VERSION="0.1.0"
 EXT_MORTON_VERSION="0.1.2"
 EXT_XXHASH_VERSION="0.1.1"
-
-sudo apt-get -y update || exit 1
-sudo apt-get -y install libjudy-dev || exit 1
 
 function write_out {
 	echo "[$1] $2"
@@ -768,6 +766,34 @@ function build_libdeflate {
 	echo " done!"
 }
 
+function build_libjudy {
+	echo -n "[libjudy] downloading $LIBJUDY_VERSION..."
+	download_file "https://sourceforge.net/projects/judy/files/judy/Judy-$LIBJUDY_VERSION/Judy-$LIBJUDY_VERSION.tar.gz" | tar -zx >> "$DIR/install.log" 2>&1
+	mv judy-$LIBJUDY_VERSION judy
+	cd judy
+
+	if [ "$DO_STATIC" == "yes" ]; then
+		local EXTRA_FLAGS="--enable-shared=no --enable-static=yes"
+	else
+		local EXTRA_FLAGS="--enable-shared=yes --enable-static=no"
+	fi
+
+	echo -n " checking..."
+	# ./bootstrap file to replace automake-1.9 with automake.
+	sed -i -e 's/automake-1.9/automake/' ./bootstrap >> "$DIR/install.log" 2>&1
+	./bootstrap >> "$DIR/install.log" 2>&1
+	RANLIB=$RANLIB ./configure --prefix="$INSTALL_DIR" \
+		$EXTRA_FLAGS >> "$DIR/install.log" 2>&1
+	echo -n " compiling..."
+	# Parallel builds do not seem to be supported.
+	make >> "$DIR/install.log" 2>&1
+	echo -n " installing..."
+	make install >> "$DIR/install.log" 2>&1
+	cd ..
+	echo " done!"
+}
+
+build_libjudy
 build_zlib
 build_gmp
 build_openssl
